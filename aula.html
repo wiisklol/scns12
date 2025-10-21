@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Experiência VR 360° com Cursor</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <!-- Botão para ativar o som -->
+    <button onclick="document.querySelector('aquatic ambience.mp3').components.sound.playSound()" style="position: absolute; top: 10px; left: 10px; z-index: 999;">
+        Ativar Som
+    </button>
+
+    <a-scene cursor="rayOrigin: mouse">
+
+        <!-- Cena 360° -->
+        <a-sky src="canyon_trail.jpg" rotation="0 -30 0"></a-sky>
+
+        <!-- Som com ID e sem autoplay (será iniciado pelo botão) -->
+        <a-sound id="sound" src="videoplayback.m4a" position="0 2 5"></a-sound>
+
+        <!-- Cursor -->
+        <a-camera>
+            <a-cursor 
+                id="cursor"
+                animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+                animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+                event-set__mouseenter="_event: mouseenter; color: #00FF00"
+                event-set__mouseleave="_event: mouseleave; color: #FFFFFF"
+                fuse="true"
+                fuse-timeout="1500"
+                raycaster="objects: .clickable">
+            </a-cursor>
+        </a-camera>
+
+        <!-- Objetos interativos na cena -->
+
+        <a-box 
+            class="clickable"
+            position="-1 0.5 -3" 
+            rotation="0 50 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#d94c4c"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click">
+        </a-box>
+
+        <!-- Segundo Box - Montanha -->
+        <a-box 
+            class="clickable"
+            position="-5 33 -30" 
+            rotation="0 90 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#1100ff"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 405 0; dur: 2000; startEvents: click"
+            animation__move="property: position; to: -0.8 1.5 -3; dur: 2000; startEvents: click">
+        </a-box>
+
+        <!-- Terceiro Box - Sol -->
+        <a-box 
+            class="clickable"
+            position="17 14 30" 
+            rotation="0 90 0" 
+            width="1" 
+            height="1" 
+            depth="1" 
+            color="#ddff00"
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: rotation; to: 0 560 0; dur: 2000; startEvents: click"
+            animation__move="property: position; to: -1.3 2.5 -3; dur: 2000; startEvents: click">
+        </a-box>
+
+        <!-- Esfera -->
+        <a-sphere 
+            class="clickable"
+            position="-50 50 90" 
+            radius="1.25" 
+            color="#ff00f7"
+            event-set__mouseenter="_event: mouseenter; scale: 1.1 1.1 1.1"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+            animation__click="property: position; to: 0 2.5 -5; dur: 500; startEvents: click; dir: alternate; loop: false">
+        </a-sphere>
+
+        <!-- Cilindro -->
+        <a-cylinder 
+            class="clickable"
+            position="1 0.75 -3" 
+            radius="0.5" 
+            height="1.5" 
+            color="#ffffff"
+            event-set__mouseenter="_event: mouseenter; color: #FF5733"
+            event-set__mouseleave="_event: mouseleave; color: #FFC65D"
+            animation__click="property: color; to: #000000; dur: 500; startEvents: click; dir: alternate; loop: true">
+        </a-cylinder>
+
+        <!-- Plano de chão -->
+        <a-plane 
+            position="0 0 -4" 
+            rotation="-90 0 0" 
+            width="4" 
+            height="4" 
+            color="#7BC8A4">
+        </a-plane>
+
+        <!-- Texto informativo -->
+        <a-text 
+            value="Olhe ao redor e clique nos objetos!" 
+            position="-1.5 2 -3" 
+            color="#FFFFFF" 
+            align="center">
+        </a-text>
+
+    </a-scene>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilo para quando o cursor está fundindo */
+        .a-fusion-cursor {
+            opacity: 0.8;
+        }
+    </style>
+</body>
+</html>
