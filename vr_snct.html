@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ambiente A-Frame com Popups</title>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <style>
+        .popup {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+            max-width: 300px;
+            display: none;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        
+        .popup-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+     <!-- Cena 360° -->
+        <a-sky src="canyon_trail.jpg" rotation="0 -90 0"></a-sky>
+    
+        <!-- Câmera com cursor -->
+        <a-camera>
+            <a-cursor 
+                id="cursor"
+                raycaster="objects: .clickable"
+                animation__click="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; startEvents: click"
+                animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; startEvents: fusing; dur: 1500"
+                event-set__mouseenter="_event: mouseenter; color: #00FF00"
+                event-set__mouseleave="_event: mouseleave; color: #FFFFFF">
+            </a-cursor>
+        </a-camera>
+
+        <!-- Céu 
+        <a-sky color="#222266"></a-sky> -->
+
+        <!-- Chão -->
+        <a-plane 
+            position="0 0 0" 
+            rotation="-90 0 0" 
+            width="20" 
+            height="20" 
+            color="#336633"
+            shadow>
+        </a-plane>
+
+        <a-box 
+    class="clickable"
+    position="-3 1 -4" 
+    width="1" 
+    height="1" 
+    depth="1" 
+    color="#FF0000"
+    shadow
+    data-title="Cubo "
+    data-description="Este é um cubo vermelho sólido. Objetos cúbicos são comuns em ambientes 3D e representam estabilidade e solidez."
+    event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+    event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+
+    animation__rotate="property: rotation; to: 0 360 0; loop: true; dur: 2000; startEvents: mouseenter; pauseEvents: mouseleave"
+    >
+</a-box>
+ 
+
+         <!-- Objeto 1: Cubo 2 -->
+         <a-box 
+         class="clickable"
+         position="-60 38 100" 
+         width="1" 
+         height="20" 
+         depth="20" 
+         color="#FF0000"
+         shadow
+         visible="false"
+         data-title="Sol"
+         data-description="o Sol, maior estrela do Sistema Solar, que alias, é seu Sistema."
+         event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+         event-set__mouseleave="_event: mouseleave; scale: 1 1 1">
+     </a-box>
+
+
+     <!-- Objeto 1: Cubo 3 -->
+     <a-box 
+     class="clickable"
+     position="-0 100 0" 
+     width="200" 
+     height="1" 
+     depth="200" 
+     color="#FF0000"
+     shadow
+     visible="false"
+     data-title="Céu azul"
+     data-description="O reflexo da cor da água, o céu é o nosso protetor contra possíveis ameaças contra o planeta, entre outras. e se divide 5 camadas."
+     event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+     event-set__mouseleave="_event: mouseleave; scale: 1 1 1">
+ </a-box>
+
+
+
+        <!-- Objeto 2: Esfera -->
+        <a-sphere 
+            class="clickable"
+            position="0 1 -4" 
+            radius="0.7" 
+            color="#00FF00"
+            shadow
+            data-title="Esfera Verde"
+            data-description="Uma esfera verde perfeita. Esferas são formas geométricas sem arestas, simbolizando continuidade e harmonia."
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1">
+        </a-sphere>
+
+        <!-- Objeto 3: Cilindro -->
+        <a-cylinder 
+            class="clickable"
+            position="3 1 -4" 
+            radius="0.5" 
+            height="1.5" 
+            color="#0000FF"
+            shadow
+            data-title="Cilindro Azul"
+            data-description="Cilindro azul vertical. Esta forma combina características de retas e curvas, representando tanto estrutura quanto fluidez."
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1">
+        </a-cylinder>
+
+        <a-cone 
+    class="clickable"
+    position="-2 0.8 -6" 
+    radius-bottom="0.6" 
+    height="1.6" 
+    color="#FFFF00"
+    shadow
+    data-title="Cone Amarelo"
+    data-description="Um cone amarelo pontiagudo. Cones representam direção e foco, apontando para objetivos específicos."
+
+    event-set__mouseenter="_event: mouseenter; scale: 0.6 1 0.6"
+    event-set__mouseleave="_event: mouseleave; scale: 1 1 1"
+
+    animation__mouseenter="property: scale; to: 0.6 1 0.6; startEvents: mouseenter; dur: 200"
+    animation__mouseleave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200">
+</a-cone>
+ 
+
+        <!-- Objeto 5: Torus -->
+        <a-torus 
+            class="clickable"
+            position="2 1 -6" 
+            arc="360" 
+            radius="0.8" 
+            radius-tubular="0.1" 
+            color="#FF00FF"
+            shadow
+            data-title="Torus Rosa"
+            data-description="Um torus rosa, também conhecido como 'rosquinha'. Esta forma representa ciclos e continuidade infinita."
+            event-set__mouseenter="_event: mouseenter; scale: 1.2 1.2 1.2"
+            event-set__mouseleave="_event: mouseleave; scale: 1 1 1">
+        </a-torus>
+
+        <!-- Iluminação -->
+        <a-entity light="type: ambient; color: #888"></a-entity>
+        <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-5 5 2"></a-entity>
+
+        <!-- Popup Container -->
+        <div id="popup" class="popup"></div>
+    </a-scene>
+
+    <script>
+        // Elementos do DOM
+        const popup = document.getElementById('popup');
+        const cursor = document.getElementById('cursor');
+
+        // Eventos para mostrar/ocultar popup
+        document.querySelectorAll('.clickable').forEach(object => {
+            // Mouse enter - mostrar popup
+            object.addEventListener('mouseenter', function(evt) {
+                const title = this.getAttribute('data-title');
+                const description = this.getAttribute('data-description');
+                
+                // Posicionar popup próximo ao cursor
+                popup.style.left = (evt.detail.intersection.point.x * 100 + 50) + '%';
+                popup.style.top = (evt.detail.intersection.point.y * 100 + 50) + '%';
+                
+                // Conteúdo do popup
+                popup.innerHTML = `
+                    <div class="popup-title">${title}</div>
+                    <div class="popup-desc">${description}</div>
+                `;
+                
+                popup.style.display = 'block';
+            });
+
+            // Mouse leave - ocultar popup
+            object.addEventListener('mouseleave', function() {
+                popup.style.display = 'none';
+            });
+
+            // Mover popup com o cursor
+            object.addEventListener('mousemove', function(evt) {
+                const intersection = evt.detail.intersection;
+                if (intersection) {
+                    // Converter coordenadas 3D para coordenadas de tela
+                    const point = intersection.point;
+                    popup.style.left = (point.x * 50 + 50) + '%';
+                    popup.style.top = (-point.y * 50 + 50) + '%';
+                }
+            });
+        });
+
+        // Sistema para atualizar posição do popup baseado no movimento do mouse
+        document.addEventListener('mousemove', function(evt) {
+            if (popup.style.display === 'block') {
+                // Posicionar popup próximo ao cursor do mouse
+                popup.style.left = (evt.clientX + 15) + 'px';
+                popup.style.top = (evt.clientY + 15) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
